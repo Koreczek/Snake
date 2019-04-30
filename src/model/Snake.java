@@ -1,17 +1,18 @@
 package model;
 
 import java.util.LinkedList;
+import java.util.List;
 
 public class Snake {
 	private int direction; //0 - up, 1 - right, 2 - down, 3 - left
 	private int sizeofsnake;
 	private LinkedList<Field> piecesofsnake = new LinkedList<Field>(); 
 	
-	private Snake() {
+	public Snake() {
 		reset();
 	}
 	
-	private void reset() {
+	public void reset() {
 		direction = 1;
 		sizeofsnake = 3;
 		addPieceOfSnake(8,10);
@@ -27,7 +28,7 @@ public class Snake {
 		this.direction = direction;
 	}
 	public void addPieceOfSnake (int x, int y) {
-		Field piecetoadd = new Field(x, y);
+		Field piecetoadd = new Field(x, y, 1);
 		piecesofsnake.addFirst(piecetoadd);
 	}
 	
@@ -81,6 +82,10 @@ public class Snake {
 		int newy = head.gety();
 		addPieceOfSnake(newx, newy);
 		removeLastPieceOfSnake();
+	}
+
+	public LinkedList<Field> getList() {
+		return piecesofsnake;
 	}
 
 		
