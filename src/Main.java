@@ -13,11 +13,15 @@ public class Main {
 			model.move();
 			view.repaint();
 			try {
-				Thread.sleep(500);
+				Thread.sleep(300);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			for(int i=0; i< model.getListOfSnakePoints().size(); i++) {
+					System.out.print(model.getListOfSnakePoints().get(i).getx() + " " + model.getListOfSnakePoints().get(i).gety() + " ");
+			}
+			System.out.println();
 		}
 	}
 

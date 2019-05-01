@@ -13,6 +13,7 @@ public class Snake {
 	}
 	
 	public void reset() {
+		piecesofsnake.clear();
 		direction = 1;
 		sizeofsnake = 3;
 		addPieceOfSnake(8,10);
@@ -28,7 +29,7 @@ public class Snake {
 		this.direction = direction;
 	}
 	public void addPieceOfSnake (int x, int y) {
-		Field piecetoadd = new Field(x, y, 1);
+		Field piecetoadd = new Field(x, y);
 		piecesofsnake.addFirst(piecetoadd);
 	}
 	
@@ -59,6 +60,9 @@ public class Snake {
 		Field head = piecesofsnake.getFirst();
 		int newx = head.getx();
 		int newy = head.gety() - 1;
+		if (newy < 0) {
+			newy = Model.size - 1;
+		}
 		addPieceOfSnake(newx, newy);
 		removeLastPieceOfSnake();
 	}
@@ -66,6 +70,9 @@ public class Snake {
 		Field head = piecesofsnake.getFirst();
 		int newx = head.getx() + 1;
 		int newy = head.gety();
+		if (newx > Model.size - 1) {
+			newx = 0;
+		}
 		addPieceOfSnake(newx, newy);
 		removeLastPieceOfSnake();
 	}
@@ -73,6 +80,9 @@ public class Snake {
 		Field head = piecesofsnake.getFirst();
 		int newx = head.getx();
 		int newy = head.gety() + 1;
+		if (newy > Model.size - 1) {
+			newy = 0;
+		}
 		addPieceOfSnake(newx, newy);
 		removeLastPieceOfSnake();
 	}
@@ -80,6 +90,9 @@ public class Snake {
 		Field head = piecesofsnake.getFirst();
 		int newx = head.getx() - 1;
 		int newy = head.gety();
+		if (newx < 0) {
+			newx = Model.size - 1;
+		}
 		addPieceOfSnake(newx, newy);
 		removeLastPieceOfSnake();
 	}

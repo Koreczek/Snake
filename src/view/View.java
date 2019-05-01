@@ -29,6 +29,8 @@ public class View extends JFrame{
 		for(int index = 0; index < snake.size(); index++) {
 			putPoint(g, snake.get(index).getx(), snake.get(index).gety() );
 		}
+		g.setColor(Color.red);
+		putPoint(g, model.getFood().getx(), model.getFood().gety());
 
 	}
 	private void putPoint(Graphics g, int x2, int y2) {

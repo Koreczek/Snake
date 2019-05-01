@@ -11,16 +11,24 @@ public class Controller implements KeyListener{
 	}
 	public void keyPressed(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_UP) {
-			model.setSnakeDirection(0);
+			if (model.getSnakeDirection() != 2) {
+				model.setSnakeDirection(0);
+			}
 		}
 		else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-			model.setSnakeDirection(1);
+			if (model.getSnakeDirection() != 3) {
+				model.setSnakeDirection(1);
+			}
 		}
 		else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-			model.setSnakeDirection(2);
+			if (model.getSnakeDirection() != 0) {
+				model.setSnakeDirection(2);
+			}
 		}
 		else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-			model.setSnakeDirection(3);
+			if (model.getSnakeDirection() != 1) {
+				model.setSnakeDirection(3);
+			}
 		}
 		
 		
