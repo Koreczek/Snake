@@ -30,6 +30,12 @@ public class Controller implements KeyListener{
 				model.setSnakeDirection(3);
 			}
 		}
+		else if (e.getKeyCode() == KeyEvent.VK_P) {
+			model.pause();
+		}
+		else if (e.getKeyCode() == KeyEvent.VK_R) {
+			model.reset();
+		}
 		
 		
 	}

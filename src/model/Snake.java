@@ -28,14 +28,6 @@ public class Snake {
 	public void setDirection(int direction) {
 		this.direction = direction;
 	}
-	public void addPieceOfSnake (int x, int y) {
-		Field piecetoadd = new Field(x, y);
-		piecesofsnake.addFirst(piecetoadd);
-	}
-	
-	private void removeLastPieceOfSnake() {
-		piecesofsnake.removeLast();
-	}
 	
 	public void move() {
 		switch(direction) {
@@ -100,6 +92,12 @@ public class Snake {
 	public LinkedList<Field> getList() {
 		return piecesofsnake;
 	}
-
+	public void addPieceOfSnake (int x, int y) {
+		Field piecetoadd = new Field(x, y);
+		piecesofsnake.addFirst(piecetoadd);
+	}
+	private void removeLastPieceOfSnake() {
+		piecesofsnake.removeLast();
+	}
 		
 }

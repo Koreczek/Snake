@@ -6,11 +6,13 @@ import java.util.Random;
 
 
 public class Model {
-	static final int size = 20;
-	Field[][] grid = new Field[size][size];
+	public static final int size = 30;
 	private Snake snake = new Snake();
+	private LinkedList<Field> eatenFood = new LinkedList<Field>(); 
 	private Field food = new Field();
 	private int score;
+	private int pause;
+	private boolean gameover;
 	
 	public Model() {
 		reset();
@@ -18,13 +20,16 @@ public class Model {
 	public void reset() { 
 		snake.reset();
 		score = 0;
+		pause = 0;
 		setFood();
+		setGameover(false);
+		eatenFood.clear();
 	}
 	private void setFood() {
 		Random generator = new Random();
 		int i = generator.nextInt(size);
 		int j = generator.nextInt(size);
-		for (int k = 0; k < snake.getList().size(); k ++) {;
+		for (int k = 0; k < snake.getList().size(); k ++) {
 			if (i == snake.getList().get(k).getx() && j == snake.getList().get(k).gety()) {
 				i = generator.nextInt(size);
 				j = generator.nextInt(size);
@@ -37,13 +42,20 @@ public class Model {
 		snake.setDirection(d);
 	}
 	public void move() {
-		snake.move();
-		Field head = snake.getList().getFirst();
-		checkColision(head);
-		eat(head);
+		if (pause % 2 == 0 && gameover == false) {
+			snake.move();
+			Field head = snake.getList().getFirst();
+			checkColision(head);
+			eat(head);
+			if(eatenFood.size() != 0 && eatenFood.getFirst().isEqual(snake.getList().getLast())) {
+				eatenFood.removeLast();
+			}
+		}
 	}
 	private void eat(Field head) {
 		if(food.isEqual(head)) {
+			Field eatedFood = new Field(food.getx(), food.gety());
+			eatenFood.addFirst(eatedFood);
 			score += 10;
 			snake.addPieceOfSnake(food.getx(), food.gety());
 			setFood();
@@ -51,7 +63,12 @@ public class Model {
 		
 	}
 	private void checkColision(Field head) {
-		// TODO Auto-generated method stub
+		for (int k = 1; k < snake.getList().size(); k ++) {
+			if (head.isEqual(snake.getList().get(k))) {
+				System.out.println(score);
+				setGameover(true);
+			}
+		}
 		
 	}
 	public LinkedList<Field> getListOfSnakePoints() {
@@ -62,5 +79,17 @@ public class Model {
 	}
 	public int getSnakeDirection() {
 		return snake.getDirection();
+	}
+	public void pause() {
+		pause++;
+	}
+	public boolean isGameover() {
+		return gameover;
+	}
+	public void setGameover(boolean gameover) {
+		this.gameover = gameover;
+	}
+	public LinkedList<Field> getEatenFood() {
+		return eatenFood;
 	}
 }
